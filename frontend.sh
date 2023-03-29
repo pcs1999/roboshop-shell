@@ -1,5 +1,5 @@
 set_loaction=$(pwd)
-yum install nginx
+yum install nginx -y
 
 systemctl enable nginx
 
@@ -14,4 +14,4 @@ cd /usr/share/nginx/html
 
 unzip /tmp/frontend.zip
 
-cp ${set_loaction}/files/roboshop.conf  /etc/nginx/default.d
+cp ${set_loaction}/files/nginx-roboshop.conf  /etc/nginx/default.d/roboshop.conf
