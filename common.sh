@@ -1,10 +1,11 @@
 condition_check () {
   if [ $? -eq 0 ]
   then
-    echo echo -e "\e[32mSUCCESS \e[0m"
+    echo echo -e "\e[32m SUCCESS \e[0m"
   else
-    echo echo -e "\e[31mFAILURE \e[0m"
+    echo echo -e "\e[31m FAILURE \e[0m"
   exit
-  echo please refer the log->${LOG}
+  echo please refer the log-> ${LOG}
   fi
 }
+echo -e "\e[32m  downloading mongo.repo file ro\e[0m"
