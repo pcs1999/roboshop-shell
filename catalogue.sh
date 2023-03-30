@@ -1,39 +1,39 @@
 set_location=$(pwd)
+LOG=/tmp/roboshop.log
 
-set -e
 
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 
-yum install nodejs -y
+yum install nodejs -y &>>${LOG}
 
-useradd roboshop
+useradd roboshop &>>${LOG}
 
-mkdir -p /app
+mkdir -p /app &>>${LOG}
 
-curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
 
-cd /app
+rm -rf /app/* &>>${LOG}
 
-rm -rf *
+cd /app &>>${LOG}
 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>>${LOG}
 
-cd /app
+cd /app &>>${LOG}
 
-npm install
+npm install &>>${LOG}
 
-cp ${set_location}/files/catalogue.service /etc/systemd/system/catalogue.service
+cp ${set_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
 
-systemctl daemon-reload
+systemctl daemon-reload &>>${LOG}
 
-systemctl enable catalogue
-systemctl start catalogue
+systemctl enable catalogue &>>${LOG}
+systemctl start catalogue &>>${LOG}
 
-cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo
+cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 
-yum install mongodb-org-shell -y
+yum install mongodb-org-shell -y &>>${LOG}
 
-mongo --host mongodb-dev.chandupcs.online </app/schema/catalogue.js
+mongo --host mongodb-dev.chandupcs.online </app/schema/catalogue.js &>>${LOG}
 
 
 
