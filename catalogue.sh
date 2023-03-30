@@ -33,5 +33,5 @@ yum install mongodb-org-shell -y
 
 mongo --host mongodb-dev.chandupcs.online </app/schema/catalogue.js
 
-systemctl start catalogue
+
 
