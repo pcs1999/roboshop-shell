@@ -1,6 +1,6 @@
 set_location=$(pwd)
 
-cp ${set_location}/files/mongodb.repo  /etc/yum.repo.d/mongo.repo
+cp ${set_location}/files/mongodb.repo  /etc/yum.repos.d/mongo.repo
 
 yum install mongodb-org -y
 
