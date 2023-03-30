@@ -8,4 +8,3 @@ condition_check () {
   echo please refer the log-> ${LOG}
   fi
 }
-echo -e "\e[32m  downloading mongo.repo file ro\e[0m"
