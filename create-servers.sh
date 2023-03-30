@@ -3,7 +3,7 @@
 ##### Change these values ###
 ZONE_ID="Z09063921V1VGRMXUB88J"
 DOMAIN="chandupcs.online"
-SG_NAME="allow-all"
+SG_NAME="all_alowdhere"
 #############################
 
 
