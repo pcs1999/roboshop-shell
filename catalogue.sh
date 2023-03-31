@@ -1,5 +1,4 @@
-set_location=$(pwd)
-LOG=/tmp/roboshop.log
+
 source common.sh
 
 echo -e "\e[32m Setup NodeJS repos \e[0m"

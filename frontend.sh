@@ -1,5 +1,4 @@
-set_loaction=$(pwd)
-LOG=/tmp/roboshop.log 
+
 source common.sh 
 
 
