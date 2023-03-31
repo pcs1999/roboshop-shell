@@ -3,4 +3,4 @@ source common.sh
 component=user
 
 NODEJS
-schema_load
+schema_load=true
