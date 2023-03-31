@@ -1,26 +1,26 @@
 
 source common.sh
 
-echo -e "\e[32m  downloading mongo.repo file ro\e[0m"
+ print_head "downloading mongo.repo file ro"
 cp ${set_location}/files/mongodb.repo  /etc/yum.repos.d/mongo.repo &>>${LOG}
 condition_check
 
-echo -e "\e[32m installing mongodb \e[0m"
-yum install mongodb-org -y &>>${LOG}
+ print_head "installing mongodb "
+yum install mongodb-org -y &>>${LOG
 condition_check
 
-echo -e "\e[32m enabling mongodb \e[0m"
+ print_head "enabling mongodb "
 systemctl enable mongod &>>${LOG}
 condition_check
 
-echo -e "\e[32m  start mongodb \e[0m"
+ print_head " start mongodb "
 systemctl start mongod &>>${LOG}
 condition_check
 
-echo -e "\e[32m changing port to 0.0.0.0  \e[0m"
+ print_head "changing port to 0.0.0.0  "
 sed -i -e 's/127.0.0.1/0.0.0.0/gi' /etc/mongod.conf &>>${LOG}
 condition_check
 
-echo -e "\e[32m  \e[0m"
+ print_head "  restart mongodb"
 systemctl restart mongod &>>${LOG}
 condition_check

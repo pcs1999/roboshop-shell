@@ -1,79 +1,79 @@
 
 source common.sh
 
-echo -e "\e[32m Setup NodeJS repos \e[0m"
+print_head " Setup NodeJS repos "
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 condition_check
 
-echo -e "\e[32m installing nodejs \e[0m"
-yum install nodejs -y &>>${LOG}
+print_head " installing nodejs "
+yum install nodejs -y &>>${LOG} 
 condition_check
 
-echo -e "\e[32m adding user roboshop \e[0m"
+print_head " adding user roboshop "
 useradd roboshop &>>${LOG}
 condition_check
 
 mkdir -p /app &>>${LOG}
 
 
-echo -e "\e[32m downloading content \e[0m"
+print_head " downloading content "
 curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
 condition_check
 
-echo -e "\e[32m   removing any old content\e[0m"
+print_head "   removing any old content"
 rm -rf /app/* &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m change to app directory \e[0m"
+print_head " change to app directory "
 cd /app &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m unziping the content of catalogue  \e[0m"
+print_head " unziping the content of catalogue  "
 unzip /tmp/catalogue.zip &>>${LOG}
 condition_check
 
-echo -e "\e[32m  change to app directory \e[0m"
+print_head "  change to app directory "
 cd /app &>>${LOG}
 condition_check
 
-echo -e "\e[32m node packages inatlling \e[0m"
+print_head " node packages inatlling "
 npm install &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m copying catalogue service file \e[0m"
+print_head " copying catalogue service file "
 cp ${set_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m  reload the system setup \e[0m"
+print_head "  reload the system setup "
 systemctl daemon-reload &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m enable catalogue \e[0m"
+print_head " enable catalogue "
 systemctl enable catalogue &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m strting catalogue \e[0m"
+print_head " strting catalogue "
 systemctl start catalogue &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m copying repo file \e[0m"
+print_head " copying repo file "
 cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m installing mongod shell from repo \e[0m"
+print_head " installing mongod shell from repo "
 yum install mongodb-org-shell -y &>>${LOG}
 condition_check
 
 
-echo -e "\e[32m redirecting js files \e[0m"
+print_head " redirecting js files "
 mongo --host mongodb-dev.chandupcs.online </app/schema/catalogue.js &>>${LOG}
 condition_check
 
