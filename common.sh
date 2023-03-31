@@ -17,9 +17,11 @@ print_head () {
   }
 
 user_check () {
+  print_head "addind user"
+  id roboshop &>>${LOG}
   if [ $? -ne 0]
   then
-     useradd roboshop &>>{LOG}
+     useradd roboshop &>>${LOG}
   fi
 }
 
