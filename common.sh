@@ -15,3 +15,10 @@ condition_check () {
 print_head () {
   echo -e "\e[1m  $1 \e[0m"
   }
+
+user_check () {
+  if [$? -ne 0]
+     useradd roboshop &>>{LOG}
+  fi
+
+}

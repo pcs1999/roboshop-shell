@@ -10,7 +10,8 @@ yum install nodejs -y &>>${LOG}
 condition_check
 
 print_head " adding user roboshop "
-useradd roboshop &>>${LOG}
+id roboshop
+user_check 
 condition_check
 
 mkdir -p /app &>>${LOG}
