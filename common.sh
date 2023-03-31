@@ -17,7 +17,7 @@ print_head () {
   }
 
 user_check () {
-  if [$? -ne 0]
+  if [ $? -ne 0]
   then
      useradd roboshop &>>{LOG}
   fi
