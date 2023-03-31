@@ -8,7 +8,7 @@ condition_check () {
   else
     echo  -e "\e[31m FAILURE \e[0m"
     echo "please refer the log-> ${LOG}"
-  exit
+    exit
   fi
 }
 
