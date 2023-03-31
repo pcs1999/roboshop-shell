@@ -86,8 +86,8 @@ systemctl start ${component} &>>${LOG}
 condition_check
 }
 
-schema_load ()
-{print_head " copying repo file "
+schema_load () {
+  print_head " copying repo file "
 cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
 condition_check
 
@@ -99,7 +99,8 @@ condition_check
 
 print_head " redirecting js files "
 mongo --host mongodb-dev.chandupcs.online </app/schema/${component}.js &>>${LOG}
-condition_check}
+condition_check
+}
 
 
 
