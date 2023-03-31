@@ -6,7 +6,7 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 condition_check
 
 print_head " installing nodejs "
-yum install nodejs -y &>>${LOG} 
+yum install nodejs -y &>>${LOG}
 condition_check
 
 print_head " adding user roboshop "
