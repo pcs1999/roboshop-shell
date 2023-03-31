@@ -37,11 +37,9 @@ print_head " installing nodejs "
 yum install nodejs -y &>>${LOG}
 condition_check
 
-print_head " adding ${component} roboshop "
 user_check
 
 mkdir -p /app &>>${LOG}
-
 
 print_head " downloading content "
 curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
