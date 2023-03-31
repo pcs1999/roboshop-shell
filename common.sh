@@ -38,9 +38,7 @@ yum install nodejs -y &>>${LOG}
 condition_check
 
 print_head " adding ${component} roboshop "
-id roboshop
-${component}_check
-condition_check
+user_check
 
 mkdir -p /app &>>${LOG}
 
