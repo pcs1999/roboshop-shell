@@ -32,5 +32,5 @@ unzip /tmp/frontend.zip &>>{LOG}
 condition_check
 
 print_head  " config for proxy nginx webserver "
-cp ${set_loaction}/files/nginx-roboshop.conf  /etc/nginx/default.d/roboshop.conf &>>{LOG}
+cp ${set_location}/files/nginx-roboshop.conf  /etc/nginx/default.d/roboshop.conf &>>{LOG}
 condition_check
