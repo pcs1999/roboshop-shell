@@ -18,7 +18,7 @@ mkdir -p /app &>>${LOG}
 
 
 print_head " downloading content "
-curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>${LOG}
+curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user.zip &>>${LOG}
 condition_check
 
 print_head "   removing any old content"
@@ -31,8 +31,8 @@ cd /app &>>${LOG}
 condition_check
 
 
-print_head " unziping the content of catalogue  "
-unzip /tmp/catalogue.zip &>>${LOG}
+print_head " unziping the content of user  "
+unzip /tmp/user.zip &>>${LOG}
 condition_check
 
 print_head "  change to app directory "
@@ -44,8 +44,8 @@ npm install &>>${LOG}
 condition_check
 
 
-print_head " copying catalogue service file "
-cp ${set_location}/files/catalogue.service /etc/systemd/system/catalogue.service &>>${LOG}
+print_head " copying user service file "
+cp ${set_location}/files/user.service /etc/systemd/system/user.service &>>${LOG}
 condition_check
 
 
@@ -54,14 +54,14 @@ systemctl daemon-reload &>>${LOG}
 condition_check
 
 
-print_head " enable catalogue "
-systemctl enable catalogue &>>${LOG}
+print_head " enable user "
+systemctl enable user &>>${LOG}
 condition_check
 
 
-print_head " strting catalogue "
-systemctl start catalogue &>>${LOG}
-condition_check
+print_head " strting user "
+systemctl start user &>>${LOG}
+condition_check 
 
 
 print_head " copying repo file "
@@ -75,7 +75,7 @@ condition_check
 
 
 print_head " redirecting js files "
-mongo --host mongodb-dev.chandupcs.online </app/schema/catalogue.js &>>${LOG}
+mongo --host mongodb-dev.chandupcs.online </app/schema/user.js &>>${LOG}
 condition_check
 
 

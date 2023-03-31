@@ -18,7 +18,7 @@ systemctl start mongod &>>${LOG}
 condition_check
 
  print_head "changing port to 0.0.0.0  "
-sed -i -e 's/127.0.0.1/0.0.0.0/gi' /etc/mongod.conf &>>${LOG}
+sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>>${LOG}
 condition_check
 
  print_head "  restart mongodb"
