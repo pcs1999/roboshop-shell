@@ -1,7 +1,7 @@
 source common.sh
 
-component=catalogue
+component=shipping
 
 schema_load=true
 
-NODEJS
+maven

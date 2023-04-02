@@ -5,7 +5,7 @@ component=mysqld
 
 if [ -z "${root_mysql_password}" ]; then
   echo "root_mysql_password is misssing"
-  exit 
+  exit
 fi
 
 print_head "disable MySQL 8 version."

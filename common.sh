@@ -25,40 +25,28 @@ fi
 }
 condition_check
 
-NODEJS (){
+app_preq () {
+  user1_check &>>${LOG}
 
-print_head " Setup NodeJS repos "
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
-condition_check
+  mkdir -p /app
 
-print_head " installing nodejs "
-yum install nodejs -y &>>${LOG}
-condition_check
+  print_head " downloading content "
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
+  condition_check
 
-user1_check &>>${LOG}
+  print_head "removing any old content"
+  rm -rf /app/*  &>>${LOG}
+  condition_check
 
-mkdir -p /app 
+  print_head "unziping the content of ${component}  "
+  cd /app
+  unzip /tmp/${component}.zip &>>${LOG}
+  condition_check
 
-print_head " downloading content "
-curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
-condition_check
+}
 
-print_head "removing any old content"
-rm -rf /app/*  &>>${LOG}
-condition_check
-
-print_head "unziping the content of ${component}  "
-cd /app
-unzip /tmp/${component}.zip &>>${LOG}
-condition_check
-
-print_head "node packages installing"
-cd /app
-npm install &>>${LOG}
-condition_check
-
-
-print_head "copying ${component} service file "
+systemd () {
+print_head "copying ${component} service file"
 cp ${set_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
 condition_check
 
@@ -76,9 +64,27 @@ condition_check
 print_head " start ${component} "
 systemctl start ${component}  &>>${LOG}
 condition_check
+}
 
 
-if [ ${schema_load} == "true" ]; then
+NODEJS (){
+
+print_head " Setup NodeJS repos "
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
+condition_check
+
+print_head " installing nodejs "
+yum install nodejs -y &>>${LOG}
+condition_check
+
+
+print_head "node packages installing"
+cd /app
+npm install &>>${LOG}
+condition_check
+
+
+if [ "${schema_load}" == "true" ]; then
     print_head " copying repo file "
     cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
     condition_check
@@ -92,6 +98,27 @@ if [ ${schema_load} == "true" ]; then
     mongo --host mongodb-dev.chandupcs.online </app/schema/${component}.js  &>>${LOG}
     condition_check
  fi
+}
+
+maven () {
+  print_head " installing $(component) "
+  yum install $(component) -y &>>${LOG} &>>${LOG}
+  condition_check
+
+ app_preq
+
+ systemd
+
+
+ print_head " clean packege command $(component) "
+ cd /app
+ mvn clean package &>>${LOG}
+
+ print_head "  moving $(component).jar files from taget folder to app directory "
+ mv target/shipping-1.0.jar shipping.jar &>>${LOG} &>>${LOG}
+
+
+
 }
 
 
