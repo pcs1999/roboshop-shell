@@ -1,7 +1,7 @@
 
 source common.sh
 
-component= mysqld
+component=mysqld
 
 print_head "disable MySQL 8 version."
 dnf module disable mysql -y &>>${LOG}
