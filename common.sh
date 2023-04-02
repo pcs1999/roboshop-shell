@@ -28,48 +28,48 @@ condition_check
 NODEJS (){
 
 print_head " Setup NodeJS repos "
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG}
 condition_check
 
 print_head " installing nodejs "
-yum install nodejs -y 
+yum install nodejs -y &>>${LOG}
 condition_check
 
-user1_check
+user1_check &>>${LOG}
 
 mkdir -p /app 
 
 print_head " downloading content "
-curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip 
+curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
 condition_check
 
 print_head "removing any old content"
-rm -rf /app/* 
+rm -rf /app/*  &>>${LOG}
 condition_check
 
 print_head "unziping the content of ${component}  "
 cd /app
-unzip /tmp/${component}.zip 
+unzip /tmp/${component}.zip &>>${LOG}
 condition_check
 
 print_head "node packages installing"
 cd /app
-npm install 
+npm install &>>${LOG}
 condition_check
 
 
 print_head "copying ${component} service file "
-cp ${set_location}/files/${component}.service /etc/systemd/system/${component}.service 
+cp ${set_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
 condition_check
 
 
 print_head " reload the system setup "
-systemctl daemon-reload 
+systemctl daemon-reload &>>${LOG}
 condition_check
 
 
 print_head "enable ${component} "
-systemctl enable ${component} 
+systemctl enable ${component}  &>>${LOG}
 condition_check
 
 
