@@ -2,22 +2,22 @@ set_location=$(pwd)
 LOG=/tmp/roboshop.log
 
 condition_check () {
-  if [ $? -eq 0 ]
-  then
+if [ $? -eq 0 ]
+then
     echo  -e "\e[32m SUCCESS \e[0m"
-  else
+else
     echo  -e "\e[31m FAILURE \e[0m"
     echo "please refer the log-> ${LOG}"
     exit
-  fi
+fi
 }
 
 print_head () {
   echo -e "\e[1m  $1 \e[0m"
   }
 
-user_check () {
-print_head "addind user"
+user1_check () {
+print_head "adding user"
 id roboshop 
 if [ $? -ne 0 ]; then
   useradd roboshop 
@@ -28,14 +28,14 @@ condition_check
 NODEJS (){
 
 print_head " Setup NodeJS repos "
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash 
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 condition_check
 
 print_head " installing nodejs "
 yum install nodejs -y 
 condition_check
 
-user_check
+user1_check
 
 mkdir -p /app 
 
@@ -47,21 +47,15 @@ print_head "   removing any old content"
 rm -rf /app/* 
 condition_check
 
-
-print_head " change to app directory "
-cd /app 
-condition_check
-
-
 print_head " unziping the content of ${component}  "
+cd /app
 unzip /tmp/${component}.zip 
 condition_check
 
-print_head "  change to app directory "
-cd /app 
-condition_check
 
-print_head " node packages inatlling "
+
+print_head " node packages installing"
+cd /app
 npm install 
 condition_check
 
