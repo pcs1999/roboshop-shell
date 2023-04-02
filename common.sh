@@ -17,12 +17,13 @@ print_head () {
   }
 
 user_check () {
-  print_head "addind user"
-  id roboshop &>>${LOG}
-  if [ $? -ne 0 ]; then
-    useradd roboshop &>>${LOG}
-  fi
+print_head "addind user"
+id roboshop &>>${LOG}
+if [ $? -ne 0 ]; then
+  useradd roboshop &>>${LOG}
+fi
 }
+condition_check
 
 NODEJS (){
 
@@ -85,8 +86,7 @@ systemctl start ${component} &>>${LOG}
 condition_check
 
 
-if [ ${schema_load} == "true" ]
-then
+if [ ${schema_load} == "true" ]; then
     print_head " copying repo file "
     cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
     condition_check
