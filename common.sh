@@ -43,34 +43,32 @@ print_head " downloading content "
 curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip 
 condition_check
 
-print_head "   removing any old content"
+print_head "removing any old content"
 rm -rf /app/* 
 condition_check
 
-print_head " unziping the content of ${component}  "
+print_head "unziping the content of ${component}  "
 cd /app
 unzip /tmp/${component}.zip 
 condition_check
 
-
-
-print_head " node packages installing"
+print_head "node packages installing"
 cd /app
 npm install 
 condition_check
 
 
-print_head " copying ${component} service file "
+print_head "copying ${component} service file "
 cp ${set_location}/files/${component}.service /etc/systemd/system/${component}.service 
 condition_check
 
 
-print_head "  reload the system setup "
+print_head " reload the system setup "
 systemctl daemon-reload 
 condition_check
 
 
-print_head " enable ${component} "
+print_head "enable ${component} "
 systemctl enable ${component} 
 condition_check
 
