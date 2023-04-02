@@ -86,11 +86,11 @@ systemctl start ${component} &>>${LOG}
 condition_check
 
 
-if [ ${schema_load} == "true" ]; then
+if [ ${schema_load} == "true" ]
+then
     print_head " copying repo file "
     cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
     condition_check
-
 
     print_head " installing mongod shell from repo "
     yum install mongodb-org-shell -y &>>${LOG}
