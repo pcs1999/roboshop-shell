@@ -3,6 +3,10 @@ source common.sh
 
 component=mysqld
 
+if [ -z "${root_mysql_password}" ]; then
+  echo "root_mysql_password is misssing"
+fi
+
 print_head "disable MySQL 8 version."
 dnf module disable mysql -y &>>${LOG}
 condition_check
@@ -24,6 +28,6 @@ systemctl start ${component} &>>${LOG}
 condition_check
 
 print_head "changing  the default root password of ${component} "
-mysql_secure_installation --set-root-pass RoboShop@1
+mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG} 
 condition_check
 
