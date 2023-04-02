@@ -7,6 +7,10 @@ print_head "disable MySQL 8 version."
 dnf module disable mysql -y &>>${LOG}
 condition_check
 
+print_head "downloading mongo.repo file ro"
+cp ${set_location}/files/mysql.repo  /etc/yum.repos.d/mongo.repo &>>${LOG}
+condition_check
+
 print_head "installing ${component} "
 yum install mysql-community-server -y &>>${LOG}
 condition_check
