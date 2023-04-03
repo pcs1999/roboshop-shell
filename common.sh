@@ -143,7 +143,7 @@ maven () {
 }
 
 python () {
-  print_head "  "
+  print_head " installing python "
   yum install python36 gcc python3-devel -y &>>${LOG}
   condition_check
 
@@ -151,7 +151,7 @@ python () {
 
  print_head " installing python requirements "
  cd /app
- pip3.6 install -r requirements.txtprint_head  &>>${LOG}
+ pip3.6 install -r requirements.txt &>>${LOG}
  condition_check
 
  print_head " update passwords in ${component} file"
