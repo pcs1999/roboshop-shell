@@ -156,7 +156,7 @@ python () {
 
  print_head " update passwords in ${component} file"
  cd /app
- sed -i -e 's/rabbitmq_roboshop_password/${rabbitmq_roboshop_password}'  ${set_location}/files/${component}.service &>>${LOG}
+ sed -i -e "s/rabbitmq_roboshop_password/${rabbitmq_roboshop_password}"  ${set_location}/files/${component}.service &>>${LOG}
  condition_check
 
  systemd
