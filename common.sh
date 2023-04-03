@@ -91,7 +91,7 @@ schema_load () {
          condition_check
 
          print_head " loading mysql "
-         mysql --host mysql-dev.chandupcs.online -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>${LOG}
+         mysql --host mysql-dev.chandupcs.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql &>>${LOG}
          condition_check
       fi
    fi
