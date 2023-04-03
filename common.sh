@@ -127,12 +127,12 @@ maven () {
 
  app_preq
 
- print_head " clean packege command $(component) "
+ print_head " clean packege command ${component} "
  cd /app
  mvn clean package &>>${LOG}
 
- print_head "moving $(component).jar files from taget folder to app directory "
- mv target/$(component)-1.0.jar $(component).jar &>>${LOG}
+ print_head "moving ${component}.jar files from taget folder to app directory "
+ mv target/${component}-1.0.jar $S{component}.jar &>>${LOG}
 
 systemd
 
