@@ -133,7 +133,7 @@ maven () {
  condition_check
 
  print_head "moving ${component}.jar files from target folder to app directory "
- mv target/${component}-1.0.jar $S{component}.jar &>>${LOG}
+ mv target/shipping-1.0.jar  shipping.jar &>>${LOG}
  condition_check
 
  systemd
