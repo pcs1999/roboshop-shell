@@ -130,11 +130,13 @@ maven () {
  print_head " clean packege command ${component} "
  cd /app
  mvn clean package &>>${LOG}
+ condition_check
 
- print_head "moving ${component}.jar files from taget folder to app directory "
+ print_head "moving ${component}.jar files from target folder to app directory "
  mv target/${component}-1.0.jar $S{component}.jar &>>${LOG}
+ condition_check
 
-systemd
+ systemd
 
 schema_load
 
