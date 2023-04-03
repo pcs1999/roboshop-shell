@@ -132,7 +132,7 @@ maven () {
  mvn clean package &>>${LOG}
  condition_check
 
- print_head "moving ${component}.jar files from target folder to app directory "
+ print_head "moving ${component} files from target folder to app directory "
  mv target/shipping-1.0.jar  shipping.jar &>>${LOG}
  condition_check
 

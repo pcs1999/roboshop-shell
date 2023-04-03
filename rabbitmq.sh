@@ -1,7 +1,7 @@
 source common.sh
 
 if [ -z "${roboshop_mysql_password}" ]; then
-  echo "Variable root_mysql_password is needed"
+  echo "Variable roboshop_mysql_password is needed"
   exit
 fi
 
