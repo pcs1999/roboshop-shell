@@ -90,7 +90,7 @@ schema_load () {
          condition_check
 
          print_head " loading mysql "
-         mysql --host mysql-dev.chandupcs.online -uroot -p${root_mysql_password} < /app/schema/shipping.sql &>>${LOG}
+         mysql --host mysql-dev.chandupcs.online -uroot -p${root_mysql_password} </app/schema/shipping.sql &>>${LOG}
          condition_check
       fi
    fi
@@ -121,9 +121,9 @@ schema_load
 }
 
 maven () {
-  print_head " installing maven "
-  yum install maven -y &>>${LOG}
-  condition_check
+ print_head " installing maven "
+ yum install maven -y &>>${LOG}
+ condition_check
 
  app_preq
 
@@ -138,7 +138,7 @@ maven () {
 
  systemd
 
-schema_load
+ schema_load
 
 }
 
