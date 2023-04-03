@@ -79,7 +79,7 @@ schema_load () {
       condition_check
 
       print_head " loading mysql "
-      mysql --host mongodb-dev.chandupcs.online < /app/schema/${component}.js &>>${LOG}
+      mongo  --host mongodb-dev.chandupcs.online < /app/schema/${component}.js &>>${LOG}
       condition_check
 
 
