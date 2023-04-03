@@ -121,8 +121,8 @@ schema_load
 }
 
 maven () {
-  print_head " installing $(component) "
-  yum install $(component) -y &>>${LOG}
+  print_head " installing maven "
+  yum install maven -y &>>${LOG}
   condition_check
 
  app_preq
