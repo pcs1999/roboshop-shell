@@ -69,7 +69,7 @@ condition_check
 schema_load () {
   if [ ${schema_load} == "true" ]; then
 
-    if [ ${schema_type} == "mongod" ]; then
+    if [ ${schema_type} == "mongo" ]; then
       print_head " copying repo file "
       cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
       condition_check
@@ -78,7 +78,7 @@ schema_load () {
       yum install mongodb-org-shell -y  &>>${LOG}
       condition_check
 
-      print_head " loading mysql "
+      print_head " loading mongod "
       mongo  --host mongodb-dev.chandupcs.online < /app/schema/${component}.js &>>${LOG}
       condition_check
 
