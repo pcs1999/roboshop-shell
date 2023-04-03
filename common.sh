@@ -84,7 +84,7 @@ schema_load () {
     fi
 
       if [ ${schema_type} == "mysql" ]; then
-        
+
          print_head " installing mysql  "
          yum install mysql -y   &>>${LOG}
          condition_check
