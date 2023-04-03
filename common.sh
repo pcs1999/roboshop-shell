@@ -141,4 +141,23 @@ schema_load
 
 }
 
+python () {
+  print_head "  "
+  yum install python36 gcc python3-devel -y &>>${LOG}
+  condition_check
+
+ app_preq
+
+ print_head " installing python requirements "
+ cd /app
+ pip3.6 install -r requirements.txtprint_head  &>>${LOG}
+ condition_check
+
+ print_head " update passwords in ${component} file"
+ cd /app
+ sed -e -i 's/rabbitmq_roboshop_password/${rabbitmq_roboshop_password}'  ${set_location}/files/${component}.service &>>${LOG}
+ condition_check
+
+
+}
 

@@ -1,6 +1,7 @@
 source common.sh
-component=catalogue
+
+component=payment
 
 schema_load=false
 
-
+python
