@@ -10,7 +10,7 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.
 condition_check
 
 print_head " install erlang "
-yum install erlang -y
+yum install erlang -y &>>${LOG}
 condition_check
 
 print_head "downloading packges of raabittmq  "
@@ -31,7 +31,7 @@ systemctl start rabbitmq-server &>>${LOG}
 condition_check
 
 print_head " add_user roboshop  "
-rabbitmqctl list users | grep roboshop &>>${LOG}
+rabbitmqctl list_users | grep roboshop &>>${LOG}
 if [ $? -ne 0 ]; then
   rabbitmqctl add_user roboshop ${roboshop_mysql_password} &>>${LOG}
 fi
