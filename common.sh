@@ -30,7 +30,7 @@ app_preq () {
 
   mkdir -p /app
 
-  print_head " downloading content "
+  print_head " downloading app  content "
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${LOG}
   condition_check
 
@@ -38,7 +38,7 @@ app_preq () {
   rm -rf /app/*  &>>${LOG}
   condition_check
 
-  print_head "unziping the content of ${component}  "
+  print_head "unziping the app content of ${component}  "
   cd /app
   unzip /tmp/${component}.zip &>>${LOG}
   condition_check
@@ -46,12 +46,12 @@ app_preq () {
 }
 
 systemd () {
-print_head "copying ${component} service file"
+print_head "configure ${component} service file"
 cp ${set_location}/files/${component}.service /etc/systemd/system/${component}.service &>>${LOG}
 condition_check
 
 
-print_head " reload the system setup "
+print_head " reload the systemd "
 systemctl daemon-reload &>>${LOG}
 condition_check
 
@@ -74,18 +74,17 @@ schema_load () {
       cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
       condition_check
 
-      print_head " installing mongod shell from repo "
+      print_head " installing mongod client "
       yum install mongodb-org-shell -y  &>>${LOG}
       condition_check
 
       print_head " loading mongod "
-      mongo  --host mongodb-dev.chandupcs.online < /app/schema/${component}.js &>>${LOG}
+      mongo  --host mongodb-dev.chandupcs.online </app/schema/${component}.js &>>${LOG}
       condition_check
-
-
     fi
 
       if [ ${schema_type} == "mysql" ]; then
+        
          print_head " installing mysql  "
          yum install mysql -y   &>>${LOG}
          condition_check
