@@ -66,6 +66,37 @@ systemctl start ${component}  &>>${LOG}
 condition_check
 }
 
+schema_load () {
+  if [ ${schema_load} == "true" ]; then
+
+    if [ ${schema_type} == "mongod" ]; then
+      print_head " copying repo file "
+      cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
+      condition_check
+
+      print_head " installing mongod shell from repo "
+      yum install mongodb-org-shell -y  &>>${LOG}
+      condition_check
+
+      print_head " loading mysql "
+      mysql --host mongodb-dev.chandupcs.online < /app/schema/${component}.js &>>${LOG}
+      condition_check
+
+
+    fi
+
+      if [ ${schema_type} == "mysql" ]; then
+         print_head " installing mysql  "
+         yum install mysql -y   &>>${LOG}
+         condition_check
+
+         print_head " loading mysql "
+         mysql --host mysql-dev.chandupcs.online -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>${LOG}
+         condition_check
+      fi
+   fi
+}
+
 
 NODEJS (){
 
@@ -77,27 +108,17 @@ print_head " installing nodejs "
 yum install nodejs -y &>>${LOG}
 condition_check
 
+app_preq
 
 print_head "node packages installing"
 cd /app
 npm install &>>${LOG}
 condition_check
 
+systemd
 
-if [ "${schema_load}" == "true" ]; then
-    print_head " copying repo file "
-    cp ${set_location}/files/mongodb.repo /etc/yum.repos.d/mongo.repo &>>${LOG}
-    condition_check
+schema_load
 
-    print_head " installing mongod shell from repo "
-    yum install mongodb-org-shell -y  &>>${LOG}
-    condition_check
-
-
-    print_head " redirecting js files "
-    mongo --host mongodb-dev.chandupcs.online </app/schema/${component}.js  &>>${LOG}
-    condition_check
- fi
 }
 
 maven () {
@@ -107,9 +128,6 @@ maven () {
 
  app_preq
 
- systemd
-
-
  print_head " clean packege command $(component) "
  cd /app
  mvn clean package &>>${LOG}
@@ -117,5 +135,10 @@ maven () {
  print_head "moving $(component).jar files from taget folder to app directory "
  mv target/$(component)-1.0.jar $(component).jar &>>${LOG}
 
+systemd
+
+schema_load
 
 }
+
+
