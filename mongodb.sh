@@ -2,7 +2,7 @@
 source common.sh
 
 print_head "downloading mongo.repo file ro"
-cp ${set_location}/files/mongodb.repo  /etc/yum.repos.d/mongo.repo &>>${LOG}
+cp ${set_location}/files/mongodb.repo  /etc/yum.repos.d/mongodb.repo &>>${LOG}
 condition_check
 
 print_head "installing mongodb "

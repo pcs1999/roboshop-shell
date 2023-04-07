@@ -13,7 +13,7 @@ dnf module disable mysql -y &>>${LOG}
 condition_check
 
 print_head "downloading mongo.repo file ro"
-cp ${set_location}/files/mysql.repo  /etc/yum.repos.d/mongo.repo &>>${LOG}
+cp ${set_location}/files/mysql.repo  /etc/yum.repos.d/mongodb.repo &>>${LOG}
 condition_check
 
 print_head "installing ${component} "
