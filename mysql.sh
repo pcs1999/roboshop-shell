@@ -30,5 +30,8 @@ condition_check
 
 print_head "changing  the default root password of ${component} "
 mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
+if [ $? -eq 1 ]; then
+  echo password already reset
+fi
 condition_check
 
